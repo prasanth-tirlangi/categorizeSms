@@ -1,4 +1,4 @@
-package com.prasanth.jsonExtractor.api;
+package com.prasanth.categorizeSms.api;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,20 +13,20 @@ import javax.websocket.Decoder.Text;
 
 import org.springframework.stereotype.Service;
 
-import com.prasanth.jsonExtractor.model.ConsolidatedSmsData;
-import com.prasanth.jsonExtractor.model.SummaryData;
-import com.prasanth.jsonExtractor.model.SmsData;
-import com.prasanth.jsonExtractor.model.SmsObject;
+import com.prasanth.categorizeSms.model.ConsolidatedSmsData;
+import com.prasanth.categorizeSms.model.SmsData;
+import com.prasanth.categorizeSms.model.SmsObject;
+import com.prasanth.categorizeSms.model.SummaryData;
 
 @Service
-public class ExtractorService {
+public class CategorizeService {
 
-	public ConsolidatedSmsData extractJson(SmsObject smsObject) {
-		
+	public ConsolidatedSmsData categorize(SmsObject smsObject) {
+
 		ConsolidatedSmsData consolidatedSmsData = new ConsolidatedSmsData();
 		DecimalFormat df = new DecimalFormat("#.00");
-		Map<String, SummaryData> mapData = getMapOfCategoriesAndSms(smsObject,df);
-		
+		Map<String, SummaryData> mapData = getMapOfCategoriesAndSms(smsObject, df);
+
 		consolidatedSmsData.setSummary(mapData.values().stream().collect(Collectors.toList()));
 		return consolidatedSmsData;
 	}
@@ -47,7 +47,7 @@ public class ExtractorService {
 
 		Pattern p = Pattern.compile("[0-9]+.[0-9]+");
 		Matcher m = p.matcher(str);
-		if(m.find()) {
+		if (m.find()) {
 			return m.group(0);
 		}
 		return "0";

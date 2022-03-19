@@ -1,4 +1,4 @@
-package com.prasanth.jsonExtractor.model;
+package com.prasanth.categorizeSms.model;
 
 public class SmsData {
 	
